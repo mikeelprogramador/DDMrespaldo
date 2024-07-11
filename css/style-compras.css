@@ -1,0 +1,76 @@
+
+/*Estilo de la compra*/
+/*  Estilo del body osea el cuerpo en general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Contenedor principal que incluye ambas columnas */
+.contenido {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Estilos para cada compra */
+.compra {
+    width: calc(50% - 10px); /* El 10px es para el espacio entre las columnas */
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.compra:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para la información de cada compra */
+.compra-info {
+    margin-bottom: 10px;
+}
+
+.compra-codigo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #c29349;
+}
+
+.compra-usuario, .compra-departamento, .compra-municipio {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Estilos para las opciones de cada compra */
+.compra-opciones {
+    text-align: right;
+}
+
+.compra-factura {
+    background-color: #c29349;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.compra-factura:hover {
+    background-color: #a3703c;
+    transform: scale(1.05);
+}
+
+/* Media Queries para hacer el diseño responsivo */
+@media (max-width: 768px) {
+    .compra {
+        width: 100%;
+    }
+}

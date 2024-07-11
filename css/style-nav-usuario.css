@@ -1,0 +1,21 @@
+.productos{
+    background-color: #DCA650;
+    
+    position:relative;
+    width: 100%; 
+    
+}
+
+
+.home{
+    position: relative;
+    left: 50px; 
+}
+.card{
+  position:relative;
+   
+}
+#bocom{
+    background-color: #B34F16;
+    border: 1px solid #B34F16;
+}

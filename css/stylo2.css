@@ -1,0 +1,77 @@
+.body{
+    background-color: #faf895;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #e0f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.form-container {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container h2 {
+    margin-bottom: 1.5rem;
+    color: #c29349;
+}
+
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+    border-color: #c29349;
+    outline: none;
+}
+
+.form-container input[type="submit"] {
+    background: #c29349;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-container input[type="submit"]:hover {
+    background: #c29349;
+}
+
+.form-container p {
+    margin-top: 1rem;
+    color: #555;
+}
+
+.form-container a {
+    color: #9e7a40;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.form-container a:hover {
+    color: #c29349;
+}
+
+
