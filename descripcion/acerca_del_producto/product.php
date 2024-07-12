@@ -1,6 +1,6 @@
 <?php
 include_once("../../metodos/clas-view.php");
-include_once("../../metodos/clas-verific.php");
+include_once("../../metodos/clas-functions.php");
 include_once("../../cajon/bootstrap/bootstrap.php");
 if(!isset( $_SESSION))session_start();
 if(!isset($_SESSION['id'])){

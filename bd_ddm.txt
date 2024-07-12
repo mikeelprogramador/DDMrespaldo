@@ -117,6 +117,20 @@ sub_valor varchar(150) not null,
 primary key(id_factura)
 );
 
+create table tb_departamentos(
+id_departamento int not null,
+departamento varchar(150) not null,
+primary key(id_departamento)
+);
+
+create table tb_municipios(
+id_municipio int not null,
+id_departamento int not null,
+municipio varchar(150) not null,
+foreign key(id_departamento) references tb_departamentos(id_departamento), 
+primary key(id_municipio)
+);
+
 show tables;
 
 /*Select*/
@@ -155,19 +169,19 @@ select count(*),
 (select producto_nombre from tb_productos as t3
 where t2.id_producto = t3.id_producto)
 from tb_compras as t1
-inner join tb_productoscompras as t2 on t1.id_compra = t2.id_compra;
+inner join tb_facturas as t2 on t1.id_compra = t2.id_compra;
 
-select DISTINCT producto_nombre,(select count(*) from tb_productoscompras as  t3 where  t1.id_producto = t3.id_producto ) as compras
+select DISTINCT producto_nombre,(select count(*) from tb_facturas as  t3 where  t1.id_producto = t3.id_producto ) as compras
 from tb_productos as t1 
-inner join tb_productoscompras as t2 on t1.id_producto = t2.id_producto;
+inner join tb_facturas as t2 on t1.id_producto = t2.id_producto;
 
 select DISTINCT nombre,(select count(*) from tb_compras as  t3 where  t1.id = t3.id_usuario ) as compras
 from tb_usuarios as t1 
 inner join tb_compras as t2 on t1.id = t2.id_usuario;
 
 
-select distinct t1.id_compra,(select count(*) from tb_productoscompras as t3 where t1.id_compra = t3.id_compra),(select nombre from tb_usuarios as t4 where t1.id_usuario = t4.id)
+select distinct t1.id_compra,(select count(*) from tb_facturas as t3 where t1.id_compra = t3.id_compra),(select nombre from tb_usuarios as t4 where t1.id_usuario = t4.id)
 from tb_compras as t1 
-inner join tb_productoscompras as t2 on t1.id_compra = t2.id_compra;
+inner join tb_facturas as t2 on t1.id_compra = t2.id_compra;
 
 select month(now());

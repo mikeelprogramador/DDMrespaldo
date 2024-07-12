@@ -2,10 +2,10 @@
 
 class Compras{
 
-    public static function agregarCompra($id_user,$depar,$munici,$telefono,$barrio,$direccion){
+    public static function agregarCompra($id_user,$depar,$munici,$telefono,$barrio,$direccion,$nombre,$email){
         include_once("modelo.php");
         $salida = 0;
-        $consulta = Model::sqlCompras($id_user,$depar,$munici,$telefono,$barrio,$direccion);
+        $consulta = Model::sqlCompras($id_user,$depar,$munici,$telefono,$barrio,$direccion,$nombre,$email);
         if($consulta){
             $salida = 1;
         }

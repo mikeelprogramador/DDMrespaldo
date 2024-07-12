@@ -273,7 +273,7 @@ class Model {
 
     public static function sqlAgregarCarrito($carrito,$id_pro,$cantidad){
         include("bd-conect/inclucion-bd.php");
-        $sql = "INSERT INTO tb_carypro(id_carrito,id_producto,cantidad)";
+        $sql = "INSERT INTO tb_carypro(id_carrito,id_producto,cantidad_de_productos)";
         $sql .= "values('$carrito','$id_pro','$cantidad')";
         return $resulatdo = $conexion->query($sql);
     }
@@ -282,7 +282,7 @@ class Model {
         include("bd-conect/inclucion-bd.php");
         if($des == 1)$dato = "*";
         if($des == 2)$dato = "t1.id_producto";
-        if($des == 3)$dato = "t2.cantidad";
+        if($des == 3)$dato = "t2.cantidad_de_productos";
         if($des == 4)$dato = "t1.precio";
         $sql = "select $dato from tb_productos as t1 ";
         $sql .= "inner join tb_carypro as t2 on t1.id_producto = t2.id_producto ";
@@ -296,7 +296,7 @@ class Model {
         if($des == 1)$operacion = "+";
         if($des == 2)$operacion = "-";
         $sql = "update tb_carypro ";
-        $sql .= "set cantidad = cantidad $operacion 1 ";
+        $sql .= "set cantidad_de_productos = cantidad_de_productos $operacion 1 ";
         $sql .= "where id_carrito = '$carrito' and id_producto = '$id_pro' ";
         return $resulatdo = $conexion->query($sql);
     }
@@ -354,10 +354,10 @@ class Model {
         return $resultado = $conexion->query($sql);
     }
 
-    public static function sqlCompras($id_user,$depar,$munici,$telefono,$barrio,$direccion){
+    public static function sqlCompras($id_user,$depar,$munici,$telefono,$barrio,$direccion,$nombre,$email){
         include("bd-conect/inclucion-bd.php");
-        $sql = "INSERT INTO tb_compras(id_usuario,departamento,municipios,telefono,barrio,direccion,fecha_compra)";
-        $sql .= "values('$id_user','$depar','$munici','$telefono','$barrio','$direccion',now())";
+        $sql = "INSERT INTO tb_compras(id_usuario,departamento,municipio,telefono,barrio,direccion,fecha_de_compra,cliente,correo)";
+        $sql .= "values('$id_user','$depar','$munici','$telefono','$barrio','$direccion',now(),'$nombre','$email')";
         return $resultado = $conexion->query($sql);
     }
 
@@ -370,15 +370,17 @@ class Model {
     public static function sqlProduCompra($id_compra,$id_pro,$cantidad,$precio){
         include("bd-conect/inclucion-bd.php");
         include_once("clas-functions.php");
-        $sql = "INSERT INTO tb_productosCompras(id_compra,id_producto,cantidades,valor)values";
+        include_once("clas-producto.php");
+        $sql = "INSERT INTO tb_facturas(id_compra,id_producto,producto,cantidades,sub_valor)values";
         $limite = count($id_pro)-1;
         for($i = 0;$i <$limite; $i ++){
             $can = $cantidad[$i];
             $valor = Funciones::intDinero($precio[$i]);
             $total = Funciones::strDinero(intval($valor) * intval($can));
             $_SESSION['totalCompra'] += intval($valor) * intval($can);
+            $porducto = Producto::productos(1,$id_pro[$i]);
             //Sql para insertra los articulos comprados;
-            $sql .= "('$id_compra','$id_pro[$i]','$can','$total')";
+            $sql .= "('$id_compra','$id_pro[$i]','$porducto','$can','$total')";
             if($i != $limite-1){
                 $sql .= ",";
             }
@@ -388,8 +390,10 @@ class Model {
 
     public static function sqlComprasUni($id_compra,$id_pro,$cantidad,$precio){
         include("bd-conect/inclucion-bd.php");
-        $sql = "INSERT INTO tb_productosCompras(id_compra,id_producto,cantidades,valor)";
-        $sql .= "values('$id_compra','$id_pro','$cantidad','$precio')";
+        include_once("clas-producto.php");
+        $porducto = Producto::productos(1,$id_pro);
+        $sql = "INSERT INTO tb_facturas(id_compra,id_producto,producto,cantidades,sub_valor)";
+        $sql .= "values('$id_compra','$id_pro','$porducto','$cantidad','$precio')";
         return $resultado = $conexion->query($sql);
     }
 
@@ -397,7 +401,7 @@ class Model {
         include("bd-conect/inclucion-bd.php");
         $sql = "delete from ";
         if($des == 1) $sql .= "tb_compras where id_compra = '$id_compra' and id_usuario = '$id_user'";
-        if($des == 2) $sql .= "tb_productosCompras where id_compra = '$id_compra'";
+        if($des == 2) $sql .= "tb_facturas where id_compra = '$id_compra'";
         return $resultado = $conexion->query($sql);
     }
 
@@ -439,30 +443,27 @@ class Model {
         include("bd-conect/inclucion-bd.php");
         $limit = "limit 1";
         if($des == 1)$valor = "t1.id_compra";
-        if($des == 2)$valor = "t2.fecha_compra";
+        if($des == 2)$valor = "t2.fecha_de_compra";
         if($des == 3)$valor = "t4.nombre";
         if($des == 4)$valor = "t4.apellido";
-        if($des == 5)$valor = "t2.municipios";
-        if($des == 6)$valor = "t4.email";
+        if($des == 5)$valor = "t2.municipio";
+        if($des == 6)$valor = "correo";
         if($des == 7)$valor = "t2.direccion";
         if($des == 8)$valor = "t2.barrio";
         if($des == 9){
             $valor = "t1.cantidades";$limit ="";
         }
         if($des == 10){
-            $valor = "producto_nombre";$limit ="";
-        }
-        if($des == 11){
-            $valor = "t3.precio";$limit ="";
+            $valor = "producto";$limit ="";
         }
         if($des == 12){
-            $valor = "valor";$limit ="";
+            $valor = "sub_valor";$limit ="";
         }
-        $sql  = "select $valor from tb_productosCompras as t1 ";
+        $sql  = "select $valor from tb_facturas as t1 ";
         $sql .= "inner join tb_compras as t2 on t1.id_compra = t2.id_compra ";
-        $sql .= "inner join tb_productos as t3 on t1.id_producto = t3.id_producto ";
         $sql .= "inner join tb_usuarios as t4 on t2.id_usuario = t4.id ";
         $sql .= "where t4.id = '$id_user' and t2.id_compra = '$id_compra' $limit";
+        //echo $sql;
         return $resultado = $conexion->query($sql);
     }
 
@@ -475,10 +476,9 @@ class Model {
 
     public static function sqlVentas(){
       include("bd-conect/inclucion-bd.php");
-      $sql  = "select DISTINCT producto_nombre,";
-      $sql .= "(select count(*) from tb_productoscompras as  t3 where  t1.id_producto = t3.id_producto ) ";
-      $sql .= "from tb_productos as t1 ";
-      $sql .= "inner join tb_productoscompras as t2 on t1.id_producto = t2.id_producto";
+      $sql  = "select DISTINCT producto,";
+      $sql .= "(select cantidades from tb_facturas as t2 where t1.id_producto = t2.id_producto )  ";
+      $sql .= "from tb_facturas as t1  ";
       return $resultado = $conexion->query($sql);
     }
 

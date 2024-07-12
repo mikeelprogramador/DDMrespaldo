@@ -50,19 +50,21 @@ if(isset($_GET['estado']) && $_GET['estado'] == "comprando" && isset($_GET['iden
     $tel        = $_SESSION['telefono'];
     $barrio     =  $_SESSION['barrio'];
     $direccion  = $_SESSION['direccion'];
+    $nombre     = Funciones::verificarPerfil(2,$id_user);
+    $emil       = $_SESSION['correo'];
 
-    if(Compras::agregarCompra($id_user,$depar,$muni,$tel,$barrio,$direccion) == 1 ){
+    if(Compras::agregarCompra($id_user,$depar,$muni,$tel,$barrio,$direccion,$nombre,$emil) == 1 ){
         $id_compra = Compras::countCompra();
         $id_productos = explode(" ",Compras::datosDeCompra(2,$id_user));//Combirtir en una array para saber cuantos productos hay
         $cantidades =  explode(" ",Compras::datosDeCompra(3,$id_user));//Combirtir en una array para saber cuantos productos hay
         $precios =  explode(" ",Compras::datosDeCompra(4,$id_user));//Combirtir en una array para saber cuantos productos hay
 
-        if(Compras::produCompra($id_compra,$id_productos,$cantidades,$precios) == 1){
+        if(Compras::produCompra($id_compra,$id_productos,$cantidades,$precios,) == 1){
             $carrito = Carrito::buscarCarrito($id_user);
             Model::sqlVaciarCarrito($carrito);
             Model::sqlActualizarCantidadesMAx($id_productos,$cantidades);
             Model::sqlActualizarTotalCompra($id_compra,$id_user);
-            header("location: ../../view/user/ddm.php");
+           header("location: ../../view/user/ddm.php");
 
         }else{
             Model::sqlBorraComporaAU(1,$id_compra,$id_user);
@@ -71,7 +73,7 @@ if(isset($_GET['estado']) && $_GET['estado'] == "comprando" && isset($_GET['iden
         }
             
     }else{
-        header("location: ../../view/user/ddm.php?seccion=carrito&error=datos");
+       header("location: ../../view/user/ddm.php?seccion=carrito&error=datos");
     }
 }
 
@@ -83,8 +85,10 @@ if(isset($_GET['estado']) && $_GET['estado'] == "comprando" && isset($_GET['iden
     $barrio     =  $_SESSION['barrio'];
     $direccion  = $_SESSION['direccion'];
     $cantidades = $_SESSION['cantidad'];
+    $nombre     = Funciones::verificarPerfil(2,$id_user);
+    $emil       = $_SESSION['correo'];
     
-    if(Compras::agregarCompra($id_user,$depar,$muni,$tel,$barrio,$direccion) == 1 ){
+    if(Compras::agregarCompra($id_user,$depar,$muni,$tel,$barrio,$direccion,$nombre,$emil) == 1 ){
 
         $id_compra = Compras::countCompra();
         $id_pro = id::desencriptar($_GET['data']);
@@ -92,6 +96,7 @@ if(isset($_GET['estado']) && $_GET['estado'] == "comprando" && isset($_GET['iden
         $total = Funciones::strDinero($cantidades*$precio);
 
         if(Compras::comprasUni($id_compra,$id_pro,$cantidades,$total) == 1){
+            Model::sqlActualizarTotalCompra($id_compra,$id_user);
             Model::sqlActualizarCantidadesUni($id_pro,$cantidades);     
             header("location: ../../view/user/ddm.php");
         }else{

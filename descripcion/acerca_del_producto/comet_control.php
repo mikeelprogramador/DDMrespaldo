@@ -1,7 +1,7 @@
 <?php
 include_once("../../metodos/clas-producto.php");
 include_once("../../metodos/clas-view.php");
-include_once("../../metodos/clas-conte_pro.php");
+include_once("../../metodos/clas-functions.php");
 include_once("../../cajon/bootstrap/bootstrap.php");
 include_once("../../metodos/clas-carrito.php");
 if(!isset($_SESSION))session_start();
@@ -26,7 +26,7 @@ if( isset($_POST['eliminarComentario']) && $_POST['eliminarComentario'] == true 
 
 if(isset($_GET['estado']) && $_GET['estado'] == "agregado"){
     $id = id::desencriptar($_GET['data']);
-    if(AcercaDelProductos::verCantidades($id,1) == 0){
+    if(Funciones::verCantidades($id,1) == 0){
         header("location: product.php?http=". $_SESSION['token']."&data=".$_GET['data']."&question=0");
     }else{
       $carrito = Carrito::buscarCarrito($_SESSION['id']);

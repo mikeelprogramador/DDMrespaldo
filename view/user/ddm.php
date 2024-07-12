@@ -1,8 +1,9 @@
 <?php
-  include_once("../../metodos/clas-verific.php");
+  include_once("../../metodos/clas-functions.php");
   include_once("../../cajon/bootstrap/bootstrap.php");
   include_once("../../metodos/clas-view.php");
   include_once("../../metodos/clas-carrito.php");
+  include_once("../../metodos/clas-sessiones.php");
 
   if(! isset($_SESSION)) session_start();
   if(! isset($_SESSION['id'])){
@@ -28,10 +29,7 @@ if($seccion == "categorias"){
 }
 
 if($seccion == "out"){
-  Verificaciones::actualizarEstadoUser(2, $_SESSION['id']);
-  session_destroy();
-  setcookie(session_name(), "", time() - 3600, "/");
-  header("location: ../../index.php");
+  Session::destruirSessiones();
 }else{
   include( "navbar-user.php" );
 }

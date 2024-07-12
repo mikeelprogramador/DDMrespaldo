@@ -4,6 +4,9 @@ include_once("../metodos/clas-view.php");
 include_once("../metodos/clas-functions.php");
 include_once("../cajon/bootstrap/bootstrap.php");
 $id = id::desencriptar($_GET['code']);
+$can = Vista::factura(9,$_SESSION['id'],$id,'total');
+$total =Vista::factura(12,$_SESSION['id'],$id,'total');
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -94,13 +97,13 @@ $id = id::desencriptar($_GET['code']);
                     <div id="columna" class="col-md">
                         <b>PRECIO UNITARIO</b>
                         <!-- Fila de la columna #1 -->
-                        <div id="columna1" class="row"><center><?php  echo Vista::factura(11,$_SESSION['id'],$id); ?></center></div>
+                        <div id="columna1" class="row"><center><?php  echo Funciones::valorUnitario($can,$total);   ?></center></div>
                     </div>
                     <!-- Columna #4 -->
                     <div id="columna" class="col-md">
                         <b>SUB-TOTAL</b>
                         <!-- Fila de la columna #1 -->
-                        <div id="columna1" class="row"><center><?php  echo Vista::factura(12,$_SESSION['id'],$id); ?></center></div>
+                        <div id="columna1" class="row"><center><?php echo Vista::factura(12,$_SESSION['id'],$id)  ?></center></div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">

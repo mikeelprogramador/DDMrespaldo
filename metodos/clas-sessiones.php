@@ -12,7 +12,7 @@ class Session{
      */
     public static function destruirSessiones(){
         include_once("clas-verific.php");
-        Verificaciones::actualizarEstadoUser(2, $_SESSION['id']);
+        Funciones::actualizarEstadoUser(2, $_SESSION['id']);
         session_destroy();
         setcookie(session_name(), "", time() - 3600, "/");
         header("location: ../../index.php");

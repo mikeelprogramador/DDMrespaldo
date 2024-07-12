@@ -63,7 +63,7 @@ function eliminar(id){;
         datatype: 'html',
         method: 'get',
         success: function(respuesta){
-            console.log(respuesta);
+            document.getElementById("search").innerHTML = respuesta;
         },
         error: function(xhr,status,error){
             console.log(error);

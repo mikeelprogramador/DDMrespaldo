@@ -10,12 +10,12 @@
 <center>
 <div class="cajon_user">
     <?php
-        echo Admin::verUsuarios();
+        echo Vista::verUsuarios();
     ?>
 </div>
 </center>
 <button onclick="recargar()">Recargar Estado Del Usuario</button>
-<button> <a href="admin.php?seccion=seccion1">volver</a> </button>
+<button> <a href="admin.php?seccion=admin_home">volver</a> </button>
     
 </body>
 </html>

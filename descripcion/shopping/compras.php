@@ -1,6 +1,6 @@
 <?php 
 include_once("../../metodos/clas-view.php");
-include_once("../../metodos/clas-conte_pro.php");
+include_once("../../metodos/clas-functions.php");
 include_once("../../cajon/bootstrap/bootstrap.php");
 if(! isset($_SESSION)) session_start();
 if(! isset($_SESSION['id'])){
@@ -30,7 +30,7 @@ if(isset($_GET['estado'])){
 
 if(isset($_GET['cantidad'])){
     $_SESSION['cantidad'] = $_GET['cantidad'];
-    if(AcercaDelProductos::verCantidades(id::desencriptar($_GET['data']),1) == 0){
+    if(Funciones::verCantidades(id::desencriptar($_GET['data']),1) == 0){
         header("location: ../acerca_del_producto/product.php?http=". $_SESSION['token']."&data=".$_GET['data']."&question=0");
     }
 }

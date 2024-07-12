@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: bd_ddm
 -- ------------------------------------------------------
@@ -28,7 +28,7 @@ CREATE TABLE `tb_carrito` (
   PRIMARY KEY (`id_carrito`),
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `tb_carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `tb_carrito` (
 
 LOCK TABLES `tb_carrito` WRITE;
 /*!40000 ALTER TABLE `tb_carrito` DISABLE KEYS */;
-INSERT INTO `tb_carrito` VALUES (2,1),(3,2);
+INSERT INTO `tb_carrito` VALUES (4,3);
 /*!40000 ALTER TABLE `tb_carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `tb_carypro` (
   KEY `id_producto` (`id_producto`),
   CONSTRAINT `tb_carypro_ibfk_1` FOREIGN KEY (`id_carrito`) REFERENCES `tb_carrito` (`id_carrito`),
   CONSTRAINT `tb_carypro_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `tb_productos` (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ CREATE TABLE `tb_categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(150) NOT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +90,7 @@ CREATE TABLE `tb_categorias` (
 
 LOCK TABLES `tb_categorias` WRITE;
 /*!40000 ALTER TABLE `tb_categorias` DISABLE KEYS */;
+INSERT INTO `tb_categorias` VALUES (1,'Ropa'),(2,'Aseo hogar'),(3,'Aseo personal'),(4,'Electrodomesticos'),(5,'Tecnologia'),(6,'Computadoras');
 /*!40000 ALTER TABLE `tb_categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +110,7 @@ CREATE TABLE `tb_categoriasproducto` (
   KEY `id_categoria` (`id_categoria`),
   CONSTRAINT `tb_categoriasproducto_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `tb_productos` (`id_producto`),
   CONSTRAINT `tb_categoriasproducto_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categorias` (`id_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +140,7 @@ CREATE TABLE `tb_comentarios` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `tb_comentarios_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `tb_productos` (`id_producto`),
   CONSTRAINT `tb_comentarios_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +172,7 @@ CREATE TABLE `tb_compras` (
   `correo` varchar(200) NOT NULL,
   `total_compra` varchar(100) NOT NULL,
   PRIMARY KEY (`id_compra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +181,32 @@ CREATE TABLE `tb_compras` (
 
 LOCK TABLES `tb_compras` WRITE;
 /*!40000 ALTER TABLE `tb_compras` DISABLE KEYS */;
+INSERT INTO `tb_compras` VALUES (1,3,'Guaviare','San José del Guaviare',2147483647,'villa andrea','calel 26','2024-07-11 18:40:20','Pepito','pepito@gmail.com',''),(8,3,'Guaviare','San Jose del Guaviare',2147483647,'villa andrea','calel 26','2024-07-11 19:44:05','Pepito','pepito@gmail.com','800000');
 /*!40000 ALTER TABLE `tb_compras` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_departamentos`
+--
+
+DROP TABLE IF EXISTS `tb_departamentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_departamentos` (
+  `id_departamento` int(11) NOT NULL,
+  `departamento` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_departamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_departamentos`
+--
+
+LOCK TABLES `tb_departamentos` WRITE;
+/*!40000 ALTER TABLE `tb_departamentos` DISABLE KEYS */;
+INSERT INTO `tb_departamentos` VALUES (95,'Guaviare');
+/*!40000 ALTER TABLE `tb_departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -197,8 +223,10 @@ CREATE TABLE `tb_facturas` (
   `producto` varchar(150) NOT NULL,
   `cantidades` int(11) NOT NULL,
   `sub_valor` varchar(150) NOT NULL,
-  PRIMARY KEY (`id_factura`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id_factura`),
+  KEY `id_compra` (`id_compra`),
+  CONSTRAINT `tb_facturas_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `tb_compras` (`id_compra`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +235,35 @@ CREATE TABLE `tb_facturas` (
 
 LOCK TABLES `tb_facturas` WRITE;
 /*!40000 ALTER TABLE `tb_facturas` DISABLE KEYS */;
+INSERT INTO `tb_facturas` VALUES (1,1,'1','computadora',1,'1.200.000,00'),(6,8,'121212','GTA VI',4,'0,00'),(7,8,'12','computadora2',4,'200.000,00');
 /*!40000 ALTER TABLE `tb_facturas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_municipios`
+--
+
+DROP TABLE IF EXISTS `tb_municipios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tb_municipios` (
+  `id_municipio` int(11) NOT NULL,
+  `id_departamento` int(11) NOT NULL,
+  `municipio` varchar(150) NOT NULL,
+  PRIMARY KEY (`id_municipio`),
+  KEY `id_departamento` (`id_departamento`),
+  CONSTRAINT `tb_municipios_ibfk_1` FOREIGN KEY (`id_departamento`) REFERENCES `tb_departamentos` (`id_departamento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_municipios`
+--
+
+LOCK TABLES `tb_municipios` WRITE;
+/*!40000 ALTER TABLE `tb_municipios` DISABLE KEYS */;
+INSERT INTO `tb_municipios` VALUES (95000,95,'San Jose del Guaviare'),(95001,95,'Retorno'),(95100,95,'Miraflores'),(95102,95,'Calamar');
+/*!40000 ALTER TABLE `tb_municipios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -237,7 +293,7 @@ CREATE TABLE `tb_productos` (
 
 LOCK TABLES `tb_productos` WRITE;
 /*!40000 ALTER TABLE `tb_productos` DISABLE KEYS */;
-INSERT INTO `tb_productos` VALUES ('1','cepillo para la ropa','Es un muy buen cepillo para la ropa','Es de muy alta calidad',10,0,'../../fotos/images (1).jfif','5.000,00','negro');
+INSERT INTO `tb_productos` VALUES ('12','computadora2','12','12',6,12,'../../fotos/images.jpg','50.000,00','12'),('121212','GTA VI','juegaso','1212',6,1212,'../../fotos/gta-vi-grand-theft-auto-6_3840x2160_xtrafondos.com.jpg','0','1221');
 /*!40000 ALTER TABLE `tb_productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +324,7 @@ CREATE TABLE `tb_usuarios` (
 
 LOCK TABLES `tb_usuarios` WRITE;
 /*!40000 ALTER TABLE `tb_usuarios` DISABLE KEYS */;
-INSERT INTO `tb_usuarios` VALUES (1,'Maicol','Sánchez','mike','$2y$12$6ZhGvHK5l69ZlKsZKfr5veHLU7rG5J/.Es4H.IOb/4HMPtwZBuVTq','2024-07-11 12:14:50',0,'Inactivo','../../img/logo-icon-person.jpg'),(2,'Juan','Castañeda','juan','$2y$12$fi04aypwRyUjHQlBfhE81Ox4VtHrOzj6jwCdtTbO226zpuqc0/s0i','2024-07-11 12:22:28',1,'Activo','../../img/logo-icon-person.jpg');
+INSERT INTO `tb_usuarios` VALUES (1,'Maicol','Sánchez','mike','$2y$12$6ZhGvHK5l69ZlKsZKfr5veHLU7rG5J/.Es4H.IOb/4HMPtwZBuVTq','2024-07-11 12:14:50',0,'Activo','../../img/logo-icon-person.jpg'),(2,'Juan','Castañeda','juan','$2y$12$fi04aypwRyUjHQlBfhE81Ox4VtHrOzj6jwCdtTbO226zpuqc0/s0i','2024-07-11 12:22:28',1,'Activo','../../img/logo-icon-person.jpg'),(3,'Pepito','perez','pepito','$2y$12$rxuzlnp3n7WOAJUf/im6g.o/HumEBXf11.53fblUJ7pQkO.n/mZ6S','2024-07-11 16:56:14',2,'Inactivo','../../img/logo-icon-person.jpg');
 /*!40000 ALTER TABLE `tb_usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +354,6 @@ CREATE TABLE `tb_valoracion` (
 
 LOCK TABLES `tb_valoracion` WRITE;
 /*!40000 ALTER TABLE `tb_valoracion` DISABLE KEYS */;
-INSERT INTO `tb_valoracion` VALUES (0,'1',2,'0');
 /*!40000 ALTER TABLE `tb_valoracion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -311,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-11 12:37:06
+-- Dump completed on 2024-07-11 20:30:04

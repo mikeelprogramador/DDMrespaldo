@@ -127,3 +127,22 @@ function actualizarDinero(){
         }
     });
 }
+
+function eliminarDelCarrito(id){
+    var param = {
+        'data':id,
+        'eliminarDelCarrito': true
+    }
+    $.ajax({
+        data: param,
+        url: 'consultas.php',
+        datatype: 'html',
+        method: 'get',
+        success: function(respuesta){
+            document.getElementById('carrito').innerHTML = respuesta;
+        },
+        error: function(xhr,status,error){
+            console.log(error);
+        }
+    });
+}

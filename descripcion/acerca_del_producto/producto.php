@@ -16,7 +16,7 @@
         <hr>
     </div>
     <div class="comentarios">
-        <a href="<?php echo (Verificaciones::verificarPerfil(1, $_SESSION['id']) == 2 ? '../../view/user/ddm.php' : '../../view/adm/admin.php'); ?>">
+        <a href="<?php echo (Funciones::verificarPerfil(1, $_SESSION['id']) == 2 ? '../../view/user/ddm.php' : '../../view/adm/admin.php'); ?>">
             <button class="btn-regresar">Regresar</button>
         </a>
         <br><br>

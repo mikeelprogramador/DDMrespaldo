@@ -194,12 +194,13 @@ public static function ContenidoProducto($id, $token) {
         include_once("../../cajon/bootstrap/bootstrap.php");
         include_once("modelo.php");
         include_once("clas-functions.php");
+        include_once("clas-carrito.php");
         $salida = "";
         $consulta = Model::sqlMostrarCarrito($des,$id_user);
         while($fila = $consulta->fetch_assoc()){
             $id = id::encriptar($fila['id_producto']);
             $valor = Funciones::intDinero($fila['precio']);
-            $cantidad = floatval($fila['cantidad']);
+            $cantidad = floatval($fila['cantidad_de_productos']);
             if($fila['cantidades'] == 0){
                 $carrito = Carrito::buscarCarrito($id_user);
                 Model::sqlEliminarDelCarrito($carrito,$fila['id_producto']);
@@ -213,11 +214,11 @@ public static function ContenidoProducto($id, $token) {
             $salida .= '<div class="card-body d-flex flex-column">';
             $salida .= '<h5 class="card-title">'.$fila['producto_nombre'].'</h5>';
             $salida .= '<p class="card-text">COP $ '.$fila['precio'].'</p>';
-            $salida .= "<button class='btn btn-primary' type='button' id='incremento' onclick='sumarCantidad(\"$id\",\"{$fila['cantidad']}\",\"{$fila['cantidades']}\")'>+</button>";
-            $salida .= '<input type="number" id="cantidad" class="form-control" value="'.$fila['cantidad'].'" min="1" max="'.$fila['cantidades'].'" disabled>';
-            $salida .= "<button class='btn btn-primary' type='button' id='decremento' onclick='restarCantidad(\"$id\",\"{$fila['cantidad']}\")'>-</button>";
-            $salida .= '<p class="card-text"> Valor total: '.number_format($valor*$cantidad, 2, ',', '.').'</p>';
-            $salida .= '<button class="btn btn-primary mt-auto" >Eilimar del carrtio</button>';
+            $salida .= "<button class='btn btn-primary' type='button' id='incremento' onclick='sumarCantidad(\"$id\",\"{$cantidad}\",\"{$fila['cantidades']}\")'>+</button>";
+            $salida .= '<input type="number" id="cantidad" class="form-control" value="'.$cantidad.'" min="1" max="'.$fila['cantidades'].'" disabled>';
+            $salida .= "<button class='btn btn-primary' type='button' id='decremento' onclick='restarCantidad(\"$id\",\"{$cantidad}\")'>-</button>";
+            $salida .= '<p class="card-text"> Valor total: '.Funciones::strDinero($valor*$cantidad).'</p>';
+            $salida .= "<button class='btn btn-primary mt-auto' onclick='eliminarDelCarrito(\"$id\")'>Eilimar del carrtio</button>";
             $salida .= '</div>';
             $salida .= '</div>';
             $salida .= '</div>';
@@ -260,7 +261,7 @@ public static function ContenidoProducto($id, $token) {
             $salida .= "<p class='compra-codigo'>Código de compra: ".$fila['id_compra']."</p>";
             $salida .= "<p class='compra-usuario'>".$fila['nombre']." ".$fila['apellido']."</p>";
             $salida .= "<p class='compra-departamento'>Departamento: ".$fila['departamento']."</p>";
-            $salida .= "<p class='compra-municipio'>Municipio: ".$fila['municipios']."</p>";
+            $salida .= "<p class='compra-municipio'>Municipio: ".$fila['municipio']."</p>";
             $salida .= "<p class='compra-total'>Total: ".$fila['total_compra']."</p>";
             $salida .= "</div>";
             $salida .= "<div class='compra-opciones'>";
@@ -273,9 +274,6 @@ public static function ContenidoProducto($id, $token) {
     }
     
     
-    
-    
-
     public static function factura($des,$id_user,$id_compra,$des2 = null){
         include_once("modelo.php");
         $salida = "";
@@ -288,6 +286,43 @@ public static function ContenidoProducto($id, $token) {
         return $salida;
     }
 
+    public static function verUsuarios() {
+        include_once("modelo.php");
+        
+        $consulta = Model::sqlCraerIdUsuario(2);
+        $salida = '<div class="table-responsive">';
+        $salida .= '<table class="user-table">';
+        $salida .= '<thead>';
+        $salida .= '<tr>';
+        $salida .= '<th>Nombre</th>';
+        $salida .= '<th>Email</th>';
+        $salida .= '<th>Fecha de Registro</th>';
+        $salida .= '<th>Rol</th>';
+        $salida .= '<th>Extra</th>';
+        $salida .= '</tr>';
+        $salida .= '</thead>';
+        $salida .= '<tbody>';
+    
+        while($fila = $consulta->fetch_array()) {
+            $salida .= '<tr>'; 
+            $salida .= '<td>' . htmlspecialchars($fila[1]) . ' ' . htmlspecialchars($fila[2]) . '</td>';
+            $salida .= '<td>' . htmlspecialchars($fila[3]) . '</td>';
+            $salida .= '<td>' . htmlspecialchars($fila[5]) . '</td>';
+            $salida .= '<td>';
+            if($fila[6] == 0) $salida .= 'SuperAdmin';
+            if($fila[6] == 1) $salida .= 'Admin';
+            if($fila[6] == 2) $salida .= 'Cliente';
+            $salida .= '</td>';
+            $salida .= '<td>' . htmlspecialchars($fila[7]) . '</td>';
+            $salida .= '</tr>';
+        }
+    
+        $salida .= '</tbody>';
+        $salida .= '</table>';
+        $salida .= '</div>'; 
+    
+        return $salida;
+    }
 
 
 }    
