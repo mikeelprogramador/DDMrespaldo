@@ -24,23 +24,39 @@
   <div class="option" onclick="cambiarDato(1)">
     Cambiar contraseña
   </div>
-  <!-- contenedor 2 -->
-    <div class="option" onclick="cambiarDato(2)">
-      Cambiar Correo
-    </div>
-  <!-- conteneodor 3 -->
-    <div class="option" onclick="eliminarFoto();">
-      Eliminar foto
-    </div>
   <!-- contenedor 4 -->
-  <div class="option" onclick="DatosUsuario()">
-    Cambiar datos
+  <div class="option" onclick="datosUsuario()">
+  Cambiar datos
+  </div>
+  <!-- conteneodor 3 -->
+  <div class="option" onclick="eliminarFoto();">
+      Eliminar foto
   </div>
   <!-- contenedor 5 -->
   <div class="option" onclick="deleteCuenta(1);">
     Eliminar Cuenta
   </div>
 
+</div>
+
+<div class="container mt-5" id="datos-usuario">
+  <div class="card p-4">
+    <label for="actualizarNombre">Nombre</label>
+    <input type="text" class="form-control mb-3" value="<?php echo Usuarios::datosUsuario(1,$_SESSION['id'])?>" id="actualizarNombre" disabled>
+      
+    <label for="actualizarApellido">Apellido</label>
+    <input type="text" class="form-control mb-3" value="<?php echo Usuarios::datosUsuario(2,$_SESSION['id'])?>" id="actualizarApellido" disabled>
+      
+    <label for="actualizarEmail">Email</label>
+    <input type="email" class="form-control mb-3" value="<?php echo Usuarios::datosUsuario(3,$_SESSION['id'])?>" id="actualizarEmail" disabled>
+      
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary" onclick="habilitarActu(1)"  id="habiliatarActualizacion">Actualizar</button>
+        <button class="btn btn-secondary" onclick="devolver('datos-usuario')" id="regresar">Regresar</button>
+        <button class="btn btn-success" onclick="actualizarDatos()" id="actualizar">Actualizar datos</button>
+        <button class="btn btn-danger" onclick="habilitarActu(2)" id="cancelar">Cancelar</button>
+      </div>
+  </div>
 </div>
 
 <!-- cambio de correo o de contraseñas -->

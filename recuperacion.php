@@ -25,11 +25,12 @@ include_once("class/class_sessiones.php");
 </head>
 
 <body>
-    <?php
-    if(isset($_GET['datause'])){
-    ?>
+    <?php if(isset($_GET['datause'])):?>
+    <?php if(isset($_GET['error'])):?>
+        <script>window.alert('La contraseña no coincide')</script>
+    <?php endif;?>
         <form action="view/controller/controller_login.php?cambioPasswprd&datause=<?php echo $_GET['datause']?>" method="post">
-        <label for="">Contraseña actual</label>
+        <label for="">Ingresar la clave</label>
         <input type="password" name="passwordActual" id="passwordActual" placeholder="Ingresa la contraseña actual">
         <label for="">Nueva contraseña</label>
         <input type="password" name="passwordNueva" id="passwordnuevo" placeholder="Ingresa la nueva contraseña">
@@ -37,12 +38,9 @@ include_once("class/class_sessiones.php");
         <input type="password" id="repetPassword" placeholder="Ingresa la nueva contraseña">
         <input type="submit">
         </form>
-    <?php
-        }
-    ?>
-    <?php
-    if(isset($_GET['recuperarContraseña'])){
-    ?>
+    <?php endif ?>
+
+    <?php if(isset($_GET['recuperarContraseña'])): ?>
     <div class="save-passwrd">
     <img src="img/Imagen3.png" alt="Logo">
     <hr>
@@ -56,9 +54,7 @@ include_once("class/class_sessiones.php");
         </form>
         <a href="login.php">Regresar</a>
     </div>
-    <?php
-        }
-    ?>
+    <?php endif;?>
     
 
 

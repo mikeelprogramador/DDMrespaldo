@@ -33,7 +33,11 @@ if(isset($_GET['deleteProducto']) ){
   if(!empty($idComet)){
     Model::sqlDeletRespuestaProducto($idComet);
   }
-  Model::sqlEliminarProducto($id);
+  Model::sqlEliminarProducto(1,$id);
+  Model::sqlEliminarProducto(2,$id);
+  Model::sqlEliminarProducto(3,$id);
+  Model::sqlEliminarProducto(4,$id);
+  Model::sqlEliminarProducto(5,$id);
   echo Vista::buscarProducto(1);
 }
 

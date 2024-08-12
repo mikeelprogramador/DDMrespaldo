@@ -53,7 +53,7 @@ if(isset($_GET['terminos'])):?>
         <center><p>¿Ya te has registrado?
           Inicia sesión por favor
         </p></center>
-        <a href="terminos.php" style="color: #9e7a40; text-decoration: none;"><input type="checkbox" id="terminos"> Terminos y condiciones</a>
+        <a href="terminos.php?verterminos" style="color: #9e7a40; text-decoration: none;"><input type="checkbox" id="terminos"> Terminos y condiciones</a>
         <a href="login.php" style="color: #9e7a40; text-decoration: none;">Iniciar sesión</a>
     </div>
 
@@ -65,6 +65,7 @@ if(isset($_GET['terminos'])):?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/captcha.js"></script>
 <script src="js/texto.js"></script>
+<script src="js/sweetalert.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>

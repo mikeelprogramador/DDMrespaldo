@@ -99,7 +99,7 @@
       <div class="footer-content">
         <p>&copy; <?php echo date("Y"); ?> DDM. Empresa de marketing</p>
         <p>
-          <a href="#" class="text-white footer-link">Términos y condiciones</a>
+          <a href="../../terminos.php" target="_blank" class="text-white footer-link">Términos y condiciones</a>
         </p>
       </div>
       <div class="footer-contact">

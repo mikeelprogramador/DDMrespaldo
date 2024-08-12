@@ -91,7 +91,9 @@ if( isset($_GET['men'])){
     Teléfono: +57 3219612850</b> <br><br>
 
     <p>Fecha de la última actualización: 8/07/2024</p>
-    <a href="check-in.php">Regresar</a>
+    <?php if(isset($_GET['verterminos'])):?>
+      <a href="check-in.php">Regresar</a>
+    <?php endif ?>
 </div>
     
  
