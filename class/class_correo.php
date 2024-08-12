@@ -21,13 +21,13 @@ class Correo{
             $mail->SMTPDebug  =  0;                                                 //Enable verbose debug output                           
             $mail->Host       = 'smtp.mailersend.net';                              //Set the SMTP server to send through
             $mail->SMTPAuth   =  true;                                              //Enable SMTP authentication
-            $mail->Username   = 'MS_mX3fQX@trial-v69oxl596yxg785k.mlsender.net';    //SMTP username
-            $mail->Password   = 'FckVCuinkPnvDjAH';                                 //SMTP password
+            $mail->Username   = 'MS_xCgtiC@trial-pxkjn413ok0gz781.mlsender.net';    //SMTP username
+            $mail->Password   = 'A8UmBCoNSB1bKl9g';                                 //SMTP password
             $mail->SMTPSecure = 'tls';                                              //Enable implicit TLS encryption
             $mail->Port       =  587;                                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('MS_mX3fQX@trial-v69oxl596yxg785k.mlsender.net','DDM');
+            $mail->setFrom('MS_xCgtiC@trial-pxkjn413ok0gz781.mlsender.net','DDM');
             $mail->addAddress($correo,'Cliente');     //Add a recipient;
 
             //Attachments
