@@ -22,8 +22,8 @@ class Estadisticas {
       $salida = "";
       $consulta = ModelVista::sqlVentasPormeses($año);
       while($fila = $consulta->fetch_array()){
-        $valor = str_replace(".","","$fila[1]");
-        $salida .= "['".self::identificarMes($fila[0])."',".$valor.", '#b87333'],";
+        
+        $salida .= "['".self::identificarMes($fila[0])."',".$fila[1].", '#b87333'],";
       }
       //Eliminamos la ultima coma que general el texto
      $salida = rtrim($salida,",");

@@ -13,10 +13,10 @@
             <div class="metodo efectivo" onclick="typeMoney(0,'<?php if(isset($_GET['data']))echo $_GET['data'] ?>','<?php echo $_GET['estado'] ?>')">
                 <img src="../../img/efectivo.png" alt="Efectivo" class="icono"> Efectivo
             </div>
-            <div class="metodo credito" onclick="typeMoney(1,'<?php if(isset($_GET['data']))echo $_GET['data'] ?>','<?php echo $_GET['estado'] ?>')">
+            <div class="metodo credito" onclick="typeMoney(2,'<?php if(isset($_GET['data']))echo $_GET['data'] ?>','<?php echo $_GET['estado'] ?>')">
                 <img src="../../img/credito.png" alt="Crédito" class="icono"> Crédito
             </div>
-            <div class="metodo debito" onclick="typeMoney(2,'<?php if(isset($_GET['data']))echo $_GET['data'] ?>','<?php echo $_GET['estado'] ?>')">
+            <div class="metodo debito" onclick="typeMoney(1,'<?php if(isset($_GET['data']))echo $_GET['data'] ?>','<?php echo $_GET['estado'] ?>')">
                 <img src="../../img/debito.png" alt="Débito" class="icono"> Débito
             </div>
         </div>

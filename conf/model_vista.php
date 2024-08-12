@@ -116,7 +116,7 @@ class ModelVista{
 
     public static function sqlVentasPormeses($año){
         include("model/conexion.php");
-        $sql = "SELECT MONTH(fecha_de_compra) AS meses, SUM(CAST(total_compra AS DECIMAL(10, 3))) AS total_por_mes,fecha_de_compra ";
+        $sql = "SELECT MONTH(fecha_de_compra) AS meses,  SUM(CAST(REPLACE(REPLACE(total_compra, '.', ''), ',', '.') AS DECIMAL(18))) AS total_por_mes ";
         $sql .= "FROM tb_compras ";
         $sql .= "WHERE YEAR(fecha_de_compra) = '$año' AND MONTH(fecha_de_compra) BETWEEN 1 AND 12 ";
         $sql .= "GROUP BY MONTH(fecha_de_compra) ";

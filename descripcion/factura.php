@@ -33,7 +33,7 @@ $total =Vista::factura(12,$_SESSION['id'],$id,'total');
                 <div class="row">
                     <!-- Columna #1 -->
                     <!-- <div class="col-md"><img src="../img/imagen3.png" alt="" height="120px"></div> -->
-                    <div class="col-md"><img src="http.//localhost/DDM/img/imagen3.png" alt="" height="120px"></div>
+                    <div class="col-md"><img src="../img/imagen3.png" alt="" height="120px"></div>
                     <!-- Columna #2 -->
                     <div class="col-md">
                         <ul>
@@ -122,7 +122,7 @@ $total =Vista::factura(12,$_SESSION['id'],$id,'total');
                 </div>
                 <br><br>
                 <?php if(isset($_GET['ContinuarCompra'])) :?>
-                    <button><a href="#">siguiente</a></button>
+                    <button><a href="../view/user/ddm.php">siguiente</a></button>
                 <?php endif;
                 if(isset($_GET['verfactura'])) :?>
                     <button><a href="../view/user/ddm.php?seccion=compras">Regresar</a></button>

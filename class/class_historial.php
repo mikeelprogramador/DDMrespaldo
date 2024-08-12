@@ -33,7 +33,6 @@ class Historial{
                 $salida .= '<div class="card-body d-flex flex-column">';
                 $salida .= '<h5 class="card-title">'.$fila['producto_nombre'].'</h5>';
                 $salida .= '<p class="card-text">COP $ '.$fila['precio'].'</p>';
-                $salida .= '<p class="card-text">'.$fila['descripcion_producto'].'</p>';
                 $salida .= '<p class="card-text">'.Fecha::mostrarFechas($fila['fec_ver']).'</p>';
                 $salida .= '<button class="btn btn-primary mt-auto" onclick="deleteHistorial(\''.id::encriptar($fila['idHistorial']).'\')">Eliminar</button>';
                 $salida .= '</div>';

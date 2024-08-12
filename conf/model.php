@@ -284,9 +284,13 @@ class Model {
      * @return conexion se retornal el resumtado de la confulta, osea si la consulta es exitosa retornamos true
      * de lo contrario de retorna false
      */
-    public static function sqlEliminarProducto($id){
+    public static function sqlEliminarProducto($des,$id){
         include("model/conexion.php");
-        $sql = "select EliminarProductos('$id')";
+        if($des === 1)$sql = "DELETE FROM tb_historial WHERE id_producto = $id";
+        if($des === 2)$sql = "DELETE FROM tb_categoriasProducto WHERE id_producto = $id";
+        if($des === 3)$sql = "DELETE FROM tb_valoracion WHERE id_producto = $id";
+        if($des === 4)$sql = "DELETE FROM tb_carypro WHERE id_producto = $id";
+        if($des === 5)$sql = "DELETE FROM tb_productos WHERE id_producto = $id";
         $conexion->query($sql);
         $conexion->close();
     }
