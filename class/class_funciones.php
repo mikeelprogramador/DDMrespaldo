@@ -40,11 +40,11 @@ class Funciones{
     public static function activarRecapchat(){
         $salida = "<script>";
         $salida .="window.onload = function() {";
-        $salida .= "document.getElementById('password').disabled = true;";
+        $salida .= "document.getElementById('clave').disabled = true;";
         $salida .= "document.getElementById('botonEnviar').style.display = 'none';";
         $salida .= "Recaptcha(1).then((salida) => {";
         $salida .= "if(salida === true){";
-        $salida .= "document.getElementById('password').disabled = false;";
+        $salida .= "document.getElementById('clave').disabled = false;";
         $salida .= "document.getElementById('botonEnviar').style.display = 'block';";
         $salida .= "window.location.href = 'login.php?reset=';";
         $salida .= "} });";

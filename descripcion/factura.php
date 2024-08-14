@@ -3,6 +3,12 @@ session_start();
 include_once("../class/class_vista.php");
 include_once("../class/class_factura.php");
 include_once("../class/class_encript.php");
+include_once("../class/class_sessiones.php");
+Session::iniciarSessiones();
+if(Session::verificarSesssiones() == 0 ){
+  header("location: ../../index.php");
+  exit();
+}
 $id = id::desencriptar($_GET['code']);
 $can = Vista::factura(9,$_SESSION['id'],$id,'total');
 $total =Vista::factura(12,$_SESSION['id'],$id,'total');

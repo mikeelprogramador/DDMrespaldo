@@ -269,36 +269,37 @@ class Vista{
         $salida .= '</tr>';
         $salida .= '</thead>';
         $salida .= '<tbody>';
-    
+        
         while($fila = $consulta->fetch_array()) {
             $id = id::encriptar($fila[0]);
             $salida .= '<tr>'; 
-            $salida .= '<td>' . htmlspecialchars($fila[1]) . ' ' . htmlspecialchars($fila[2]) . '</td>';
-            $salida .= '<td>' . htmlspecialchars($fila[3]) . '</td>';
-            $salida .= '<td>' . htmlspecialchars($fila[5]) . '</td>';
-            $salida .= '<td>';
+            $salida .= '<td data-label="Nombre">' . htmlspecialchars($fila[1]) . ' ' . htmlspecialchars($fila[2]) . '</td>';
+            $salida .= '<td data-label="Email">' . htmlspecialchars($fila[3]) . '</td>';
+            $salida .= '<td data-label="Registro">' . htmlspecialchars($fila[5]) . '</td>';
+            $salida .= '<td data-label="Rol">';
             if($fila[6] == 0) $salida .= 'SuperAdmin';
             if($fila[6] == 1) $salida .= 'Admin';
             if($fila[6] == 2) $salida .= 'Cliente';
             $salida .= '</td>';
-            $salida .= '<td>' . htmlspecialchars($fila[7]) . '</td>';
-            $salida .= "<td><input type=button value='Editar Rol' onclick=\"rol('".$id."')\"> </td>";
+            $salida .= '<td data-label="Extra">' . htmlspecialchars($fila[7]) . '</td>';
+            $salida .= "<td data-label='Editar'><button class='btn btn-primary' onclick=\"rol('".$id."')\">Editar Rol</button></td>";
             $salida .= '</tr>';
         }
-    
+        
         $salida .= '</tbody>';
         $salida .= '</table>';
         $salida .= '</div>'; 
-
-        //contendor para editar el rango
-        $salida .= "<div class='conteinar-rango' id='rango'>";
-        $salida .= "<select id='nuevoRango'>";
+        
+        // Contenedor para editar el rango
+        $salida .= "<div class='container mt-3' id='rango'>";
+        $salida .= "<select id='nuevoRango' class='form-select'>";
         $salida .= "<option disabled selected>Rango</option>";
         $salida .= "<option value='1'>Admin</option>";
-        $salida .= "<option value='2'>Ciente</option>";
+        $salida .= "<option value='2'>Cliente</option>";
         $salida .= "</select>";
-        $salida .= "<button onclick=\"editarRol()\">Cargar Nuevo rango</button>";
-        $salida .= '</div>'; 
+        $salida .= "<button class='btn btn-primary mt-2' onclick=\"editarRol()\">Cargar Nuevo rango</button>";
+        $salida .= "<button class='btn btn-secondary mt-2' onclick=\"cancelarRol()\">Cancelar</button>";
+        $salida .= '</div>';              
     
         return $salida;
     }

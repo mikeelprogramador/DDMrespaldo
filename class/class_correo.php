@@ -19,15 +19,15 @@ class Correo{
             //Server settings   
             $mail->isSMTP();                                                        //Send using SMTP
             $mail->SMTPDebug  =  0;                                                 //Enable verbose debug output                           
-            $mail->Host       = 'smtp.mailersend.net';                              //Set the SMTP server to send through
+            $mail->Host       = 'smtp.gmail.com';                                   //Set the SMTP server to send through
             $mail->SMTPAuth   =  true;                                              //Enable SMTP authentication
-            $mail->Username   = 'MS_xCgtiC@trial-pxkjn413ok0gz781.mlsender.net';    //SMTP username
-            $mail->Password   = 'A8UmBCoNSB1bKl9g';                                 //SMTP password
+            $mail->Username   = 'ddmsoporte1@gmail.com';                            //SMTP username
+            $mail->Password   = 'grlp vycs pyro zzve';                              //SMTP password
             $mail->SMTPSecure = 'tls';                                              //Enable implicit TLS encryption
             $mail->Port       =  587;                                               //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('MS_xCgtiC@trial-pxkjn413ok0gz781.mlsender.net','DDM');
+            $mail->setFrom('ddmsoporte1@gmail.com','DDM');
             $mail->addAddress($correo,'Cliente');     //Add a recipient;
 
             //Attachments
