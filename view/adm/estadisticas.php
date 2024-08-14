@@ -1,6 +1,8 @@
+<link rel="stylesheet" href="../../css/estadisticas.css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <?php if(isset($_GET['estadisticas']) && $_GET['estadisticas'] === "ventas"):?>
-  <script type="text/javascript">
+ <div class="scrit">
+ <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
@@ -18,16 +20,16 @@
       2]);
 
       var options = {
-        title: "Productos con mayor ventas",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+      title: "Productos con mayor ventas",
+      bar: {groupWidth: "95%"},
+      legend: { position: "none" },
       };
+
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
     }
   </script>
+ </div>
 <?php endif ?>
 
 
@@ -52,11 +54,9 @@
       2]);
 
       var options = {
-        title: "Ingresos totales",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+      title: "Productos con mayor ventas",
+      bar: {groupWidth: "95%"},
+      legend: { position: "none" },
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
@@ -90,11 +90,9 @@
       2]);
 
       var options = {
-        title: "ingresos por mes",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
+      title: "Productos con mayor ventas",
+      bar: {groupWidth: "95%"},
+      legend: { position: "none" },
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);

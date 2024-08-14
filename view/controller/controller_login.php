@@ -40,27 +40,27 @@ if( isset($_GET['log']) && $_GET['log'] == 1){
 //Registro de usuario
 if( isset($_GET['log']) && $_GET['log'] == 0){
 
-    // $email = Funciones::vacunaXxs($_POST['email']);
-    // $password = Funciones::vacunaXxs($_POST['clave']);
-    // $nombre = Funciones::vacunaXxs($_POST['nom']);
-    // $apellido = Funciones::vacunaXxs( $_POST['apellido']);
-    // $registro = Login::registrar($nombre,$apellido,$email,$password);
-    // $id = Login::encontrarUsuario(2,$email);
+    $email = Funciones::vacunaXxs($_POST['email']);
+    $password = Funciones::vacunaXxs($_POST['clave']);
+    $nombre = Funciones::vacunaXxs($_POST['nom']);
+    $apellido = Funciones::vacunaXxs( $_POST['apellido']);
+    $registro = Login::registrar($nombre,$apellido,$email,$password);
+    $id = Login::encontrarUsuario(2,$email);
 
-    // if( $registro == 1 ){
-    //     $_SESSION['id'] = $id;
-    //     Usuarios::actualizarEstadoUser(1, $id);
-    //     header("location: ../user/ddm.php?");
-    //     exit();
-    // }
-    // if( $registro == 0){
-    //     header("location: ../../check-in.php?men=".$registro."error");
-    //     exit();
-    // }
-    // if( $registro == -1 ){
-    //     header("location: ../../check-in.php?men=".$registro."error");
-    //     exit();
-    // }
+    if( $registro == 1 ){
+        $_SESSION['id'] = $id;
+        Usuarios::actualizarEstadoUser(1, $id);
+        header("location: ../user/ddm.php?");
+        exit();
+    }
+    if( $registro == 0){
+        header("location: ../../check-in.php?men=".$registro."error");
+        exit();
+    }
+    if( $registro == -1 ){
+        header("location: ../../check-in.php?men=".$registro."error");
+        exit();
+    }
 
 }
 

@@ -52,7 +52,7 @@ if(isset($_GET['reset'])){
           <input type="text" name="email" placeholder="Correo" required>
             <div style="position: relative;">
                 <input type="password" id="clave" name="clave" placeholder="Contraseña" required style="padding-right: 30px;">
-                <img id="toggle-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña" style="width: 10%;">
+                <img id="toggle-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña" style="width: 10%;"  onclick="vercontraseña('clave',1)">
             </div>
             <br><br>
             <input type="submit" id="botonEnviar" name="enviar" value="Iniciar Sesión" >

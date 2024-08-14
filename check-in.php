@@ -41,11 +41,11 @@ if(isset($_GET['terminos'])):?>
             <input type="text" id="email" name="email" placeholder="Correo" required>
             <div class="clave">
                 <input type="password" id="clave" name="clave" placeholder="Contraseña" required>
-                <img id="toggle-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña">
+                <img id="toggle-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña" onclick="vercontraseña('clave',1)">
             </div>
             <div class="clave">
                 <input type="password" id="confirm_clave" name="confirm_clave" placeholder="Confirmar Contraseña" required>
-                <img id="toggle-confirm-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña">
+                <img id="toggle-confirm-password" class="toggle-password" src="img/ojo1.png" alt="Mostrar contraseña" onclick="vercontraseña('confirm_clave',1)">
             </div>
             <div id="error" class="error"></div>
             <input type="submit" name="enviar" value="Finalizar Registro">
@@ -53,7 +53,7 @@ if(isset($_GET['terminos'])):?>
         <center><p>¿Ya te has registrado?
           Inicia sesión por favor
         </p></center>
-        <a href="terminos.php?verterminos" style="color: #9e7a40; text-decoration: none;"><input type="checkbox" id="terminos"> Terminos y condiciones</a>
+        <a href="terminos.php?verterminos" style="color: #9e7a40; text-decoration: none;"><input type="checkbox" id="terminos" required> Terminos y condiciones</a>
         <a href="login.php" style="color: #9e7a40; text-decoration: none;">Iniciar sesión</a>
     </div>
 

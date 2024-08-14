@@ -1,0 +1,48 @@
+delimiter //
+create trigger eliminarProducto
+after delete on 
+tb_productos
+for each row begin 
+	 insert into tb_historial_productos()
+     value(null,concat("Se ilimino el producto: ", old.producto_nombre),concat("Codigo: ",old.id_producto),DATE_FORMAT(NOW(), '%Y-%m-%d %h:%i:%s %p'));
+end;
+// delimiter ;
+
+
+
+delimiter //
+create trigger crearProducto
+after insert on 
+tb_productos
+for each row begin 
+	 insert into tb_historial_productos()
+     value(null,concat("Se Creo el producto: ", new.producto_nombre),concat("Codigo: ",new.id_producto),DATE_FORMAT(NOW(), '%Y-%m-%d %h:%i:%s %p'));
+end;
+// delimiter ;
+
+delimiter //
+CREATE FUNCTION EliminarProductos(id VARCHAR(10)) RETURNS INT
+BEGIN
+    DECLARE id_pro VARCHAR(10);
+    SET id_pro = id;
+
+    DELETE FROM tb_comentarios WHERE id_producto = id_pro;
+    DELETE FROM tb_historial WHERE id_producto = id_pro;
+    DELETE FROM tb_categoriasProducto WHERE id_producto = id_pro;
+    DELETE FROM tb_valoracion WHERE id_producto = id_pro;
+    DELETE FROM tb_carypro WHERE id_producto = id_pro;
+    DELETE FROM tb_productos WHERE id_producto = id_pro;
+
+    RETURN 1;
+END;
+// DELIMITER ;
+
+
+
+Nota 
+SET FOREIGN_KEY_CHECKS = 0;
+set sql_safe_updates = 0;
+
+show triggers;
+show function status where Db = 'bd_ddm';
+show procedure status where Db = 'bd_ddm';

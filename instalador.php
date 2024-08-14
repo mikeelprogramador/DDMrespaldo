@@ -20,6 +20,8 @@ if($conexion->query($sql_create_bd) == true ){
 
     $conexion2 = new mysqli($server,$root,$clave,$base);
     $sql = file_get_contents($ruta_base);
+    $sql = str_replace("DELIMITER",'',$sql);
+    $sql = str_replace(";;",'',$sql);
 
     // Ejecutar múltiples consultas separadas por punto y coma
     if ($conexion2->multi_query($sql)) {
@@ -36,4 +38,3 @@ if($conexion->query($sql_create_bd) == true ){
 }
 $conexion->close();
 $conexion2->close();
-

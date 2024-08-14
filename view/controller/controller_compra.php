@@ -109,7 +109,7 @@ if(isset($_GET['estado']) && $_GET['estado'] == "comprando" && isset($_GET['iden
         if(Compras::comprasUni($id_compra,$id_pro,$cantidades,Funciones::strDinero($_SESSION['totalCompra'])) == 1){
             Model::sqlActualizarTotalCompra($id_compra,$id_user);
             Model::sqlActualizarCantidadesUni($id_pro,$cantidades);     
-            header("location: ../../view/user/ddm.php");
+            header("location: ../../descripcion/factura.php?code=".id::encriptar($id_compra)."&ContinuarCompra");
             exit();
         }else{
             Model::sqlBorraComporaAU(1,$id_compra,$_SESSION['id']);
